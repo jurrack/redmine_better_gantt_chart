@@ -1,8 +1,7 @@
 require 'redmine'
 
-require 'dispatcher'
 
-Dispatcher.to_prepare :redmine_issue_dependency do
+Rails.configuration.to_prepare do
   require_dependency 'issue'
   require_dependency 'project'
   # Guards against including the module multiple time (like in tests)
