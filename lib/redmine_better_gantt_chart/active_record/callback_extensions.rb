@@ -6,14 +6,14 @@ module RedmineBetterGanttChart
         base.extend ClassMethods
 
         base.class_eval do
-          alias_method_chain :run_callback, :switch
+          alias_method_chain :run_callbacks, :switch
           class_inheritable_accessor :disabled_callbacks
           self.disabled_callbacks = []  # set default to empty array
         end
       end
 
       # overloaded callback method with hook to disable callbacks
-      def callback_with_switch(method)
+      def run_callbacks_with_switch(method)
         self.disabled_callbacks ||= []  # FIXME: this is a hack required because we don't inherit the default [] from AR::Base properly?!
         if self.disabled_callbacks.include?( method.to_s ) # disable hook
           return true
